@@ -53,7 +53,11 @@ p.tweet-text {
     white-space: normal;
 }
 
-.item-md {
+.list-ios .item-block .item-inner {
+	border: none;
+}
+
+.item-md, .item-ios {
 	&.tweet {
 		padding-left: 10px;
 		border-bottom: 1px solid $tweet-border-color;
@@ -69,6 +73,21 @@ p.tweet-text {
     		padding: 0 0 0 10px;
     		h2 {
     			margin-top: 0;
+    		}
+    	}
+    	.retweet {
+    		.col-1 {
+    			min-width: 45px;
+    			width: 45px;
+    		}
+    		p, ion-icon {
+    			font-size: 1.2rem;
+    		}
+    		ion-icon {
+    			margin: 0;
+    			line-height: normal;
+    			display: inherit;
+    			text-align: right;
     		}
     	}
 	}
