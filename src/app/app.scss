@@ -14,3 +14,79 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+.toolbar-background-md {
+    //background: map-get($colors, roman);
+}
+
+h6, h5, h4, h3, h2, h1, p {
+	//color: $app-default-font-color;
+	//font-family: $app-default-font-family; 
+
+    &.bold {
+      	font-weight: bold;
+    }
+
+	&.italic {
+		font-style: italic;
+	}
+}
+
+.tabs-md { 
+	.tab-button {
+    	min-height: 4.5rem;
+    } 
+	.tab-button-icon {
+    	min-width: 3rem;
+		font-size: 3rem;
+	}
+}
+
+.name-tag {
+	font-weight: normal;
+	color: #666;
+}
+
+p.tweet-text { 
+    color: black;
+    margin-top: 10px;
+    white-space: normal;
+}
+
+.item-md {
+	&.tweet {
+		padding-left: 10px;
+		border-bottom: 1px solid $tweet-border-color;
+		img {
+			border-radius: 50%;
+    		overflow: hidden;
+    		min-width: 45px;
+    		min-height: 45px;
+    		width: 45px;
+    		height: 45px;
+		}
+		.col {
+    		padding: 0 0 0 10px;
+    		h2 {
+    			margin-top: 0;
+    		}
+    	}
+	}
+
+	ion-avatar[item-left] {
+		position: relative;
+		margin: 0 10px 0 0;
+		img {
+    		width: 45px;
+    		height: 45px;
+		}
+	}
+
+	.label-md {
+    	margin-right: 0px;
+	}
+}
+
+.list-md .item-block .item-inner {
+    border: none;
+}

@@ -24,13 +24,16 @@ $font-path: "../assets/fonts";
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #488aff,
-  secondary:  #32db64,
-  danger:     #f53d3d,
-  light:      #f4f4f4,
-  dark:       #222
+    //primary:    #488aff,
+    primary:    #66023C,
+    secondary:  #32db64,
+    danger:     #f53d3d,
+    light:      #f4f4f4,
+    dark:       #222,
+    roman:      #66023C,
 );
 
+$tweet-border-color: #dedede;
 
 // App iOS Variables
 // --------------------------------------------------
