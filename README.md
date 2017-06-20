@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 This is a starter template for [Ionic](http://ionicframework.com/docs/) projects.
 
 ## How to use this template
@@ -24,3 +25,7 @@ $ ionic cordova run ios
 
 Substitute ios for android if not on a Mac.
 
+=======
+# roman-twitter
+Lightweight Twitter client in Ionic
+>>>>>>> ba3fc65f771a65d139de60b8c7e35c47e1022c2d
