@@ -1,6 +1,17 @@
 <ion-header>
     <ion-navbar color="primary">
-        <ion-title>Home</ion-title>
+        <ion-title>
+            <div class="row">
+                <div class="col-1">
+                    <img class="profile-pic vertical-center"
+                         src="http://pbs.twimg.com/profile_images/460968966928609280/RIB8G7AU_normal.png" 
+                         onError="this.src='./assets/img/person-icon.png'">
+                </div>
+                <div class="col">
+                    <h3 class="vertical-center">Home</h3>
+                </div>
+            </div>
+        </ion-title>
     </ion-navbar>
 </ion-header>
 
@@ -12,13 +23,25 @@
             <!-- If is not a retweet -->
             <div class="row" *ngIf="!post.retweeted_status">
                 <div class="col-1">
-                    <img src="{{ post.user.profile_image_url }}" 
+                    <img class="profile-pic"
+                         src="{{ post.user.profile_image_url }}" 
                          onError="this.src='./assets/img/person-icon.png'">
                 </div>
                 <div class="col">
                     <h2 class="bold">{{ post.user.name }}<span class="name-tag"> @{{ post.user.screen_name }}</span></h2>
                     <p>{{ post.created_at | timeAgo }}</p>
-                    <p class="tweet-text">{{ post.text }}</p>  
+                    <p class="tweet-text">{{ post.text }}</p>
+                    <div class="row tweet-buttons">
+                        <div class="col tweet-buttons">
+                            <ion-icon name="ios-chatbubbles-outline"></ion-icon>
+                        </div>
+                        <div class="col tweet-buttons">
+                            <ion-icon name="md-sync"></ion-icon>
+                        </div>
+                        <div class="col tweet-buttons">
+                            <ion-icon name="md-heart-outline"></ion-icon>
+                        </div>
+                    </div>  
                 </div>
             </div>
 
@@ -28,7 +51,7 @@
                 <div class="row retweet">
                     <div class="col-1">
                         <p>
-                            <ion-icon name="sync"></ion-icon>
+                            <ion-icon name="md-sync"></ion-icon>
                         </p>
                     </div>
                     <div class="col">
@@ -38,15 +61,41 @@
 
                 <div class="row">
                     <div class="col-1">
-                        <img src="{{ post.retweeted_status.user.profile_image_url }}" 
+                        <img class="profile-pic" 
+                             src="{{ post.retweeted_status.user.profile_image_url }}" 
                              onError="this.src='./assets/img/person-icon.png'">
                     </div>
                     <div class="col">
+
+                        <!--  Tweet content  -->
                         <h2 class="bold">{{ post.retweeted_status.user.name }}
                             <span class="name-tag"> @{{ post.retweeted_status.user.screen_name }}</span>
                         </h2>
                         <p>{{ post.retweeted_status.created_at | timeAgo }}</p>
-                        <p class="tweet-text">{{ post.retweeted_status.text }}</p>  
+                        <p class="tweet-text">{{ post.retweeted_status.text }}</p>
+
+                        <!--  Tweet images  -->
+                        <div *ngIf="post.retweeted_status.extended_entities &&
+                                    post.retweeted_status.extended_entities.media"
+                             class="row">
+                            <img *ngFor="let image of post.retweeted_status.extended_entities.media"
+                                 class="col tweet-image" 
+                                 src="{{ image.media_url_https }}"
+                                 width="{{ image.sizes.thumb.w }}" height="{{ image.sizes.thumb.h }}">
+                        </div>
+
+                        <!--  Tweet buttons  -->
+                        <div class="row tweet-buttons">
+                            <div class="col tweet-buttons">
+                                <ion-icon name="ios-chatbubbles-outline"></ion-icon>
+                            </div>
+                            <div class="col tweet-buttons">
+                                <ion-icon name="md-sync"></ion-icon>
+                            </div>
+                            <div class="col tweet-buttons">
+                                <ion-icon name="md-heart-outline"></ion-icon>
+                            </div>
+                        </div>  
                     </div>
                 </div>
             </div>

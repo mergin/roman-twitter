@@ -1,11 +1,47 @@
 <ion-header>
-  <ion-navbar color="primary">
-    <ion-title>
-      About
-    </ion-title>
-  </ion-navbar>
+	<ion-navbar color="primary">
+	    <ion-title>
+	    	<div class="row">
+                <div class="col-1">
+                    <img class="profile-pic vertical-center"
+                         src="http://pbs.twimg.com/profile_images/460968966928609280/RIB8G7AU_normal.png" 
+                         onError="this.src='./assets/img/person-icon.png'">
+                </div>
+                <div class="col">
+                    <h3 class="vertical-center">Mentions</h3>
+                </div>
+            </div>
+	    </ion-title>
+  	</ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
+	<ion-list>
+        <ion-item *ngFor="let post of mentions" class="tweet">
 
+            <div class="row">
+                <div class="col-1">
+                    <img src="{{ post.user.profile_image_url }}" 
+                         onError="this.src='./assets/img/person-icon.png'">
+                </div>
+                <div class="col">
+                    <h2 class="bold">{{ post.user.name }}<span class="name-tag"> @{{ post.user.screen_name }}</span></h2>
+                    <p>{{ post.created_at | timeAgo }}</p>
+                    <p class="tweet-text">{{ post.text }}</p>
+                    <div class="row tweet-buttons">
+                        <div class="col tweet-buttons">
+                            <ion-icon name="ios-chatbubbles-outline"></ion-icon>
+                        </div>
+                        <div class="col tweet-buttons">
+                            <ion-icon name="md-sync"></ion-icon>
+                        </div>
+                        <div class="col tweet-buttons">
+                            <ion-icon name="md-heart-outline"></ion-icon>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+
+        </ion-item>
+    </ion-list>
 </ion-content>
