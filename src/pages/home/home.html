@@ -28,9 +28,23 @@
                          onError="this.src='./assets/img/person-icon.png'">
                 </div>
                 <div class="col">
+
+                    <!--  Tweet content  -->
                     <h2 class="bold">{{ post.user.name }}<span class="name-tag"> @{{ post.user.screen_name }}</span></h2>
                     <p>{{ post.created_at | timeAgo }}</p>
                     <p class="tweet-text">{{ post.text }}</p>
+
+                    <!--  Tweet images  -->
+                    <div *ngIf="post.extended_entities &&
+                         post.extended_entities.media"
+                         class="row">
+                        <img *ngFor="let image of post.extended_entities.media"
+                             class="col tweet-image" 
+                             src="{{ image.media_url_https }}"
+                             width="{{ image.sizes.thumb.w }}" height="{{ image.sizes.thumb.h }}">
+                    </div>
+
+                    <!--  Tweet buttons  -->
                     <div class="row tweet-buttons">
                         <div class="col tweet-buttons">
                             <ion-icon name="ios-chatbubbles-outline"></ion-icon>
