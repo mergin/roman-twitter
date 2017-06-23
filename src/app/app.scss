@@ -71,7 +71,7 @@ ion-header {
     height: 40px;
 }
 
-.name-tag {
+.name-tag, p.time-stamp {
 	font-weight: normal;
 	color: map-get($colors, gray);
 }
@@ -87,6 +87,17 @@ p.tweet-text {
 	.col.tweet-buttons {
 		padding: 0;
 		color: map-get($colors, gray);
+		&.retweeted, &.retweeted p {
+			color: map-get($colors, green);
+		}
+		&.favorited, &.favorited p {
+			color: map-get($colors, red);
+		}
+		p {
+			display: inline-block;
+			font-size: 1.3rem;
+			vertical-align: middle;
+		}
 	}
 }
 
@@ -137,6 +148,7 @@ p.tweet-text {
     		}
     		p, ion-icon {
     			font-size: 1.2rem;
+    			color: map-get($colors, gray);
     		}
     		ion-icon {
     			margin: 0;
@@ -147,6 +159,22 @@ p.tweet-text {
     	}
     	.label-md, .label-ios {
 		    margin-bottom: 5px;
+		}
+		ion-icon.verified {
+			font-size: 0.9em;
+		}
+		.quote-tweet {
+			margin-top: 10px;
+			padding: 5px;
+		    border: solid 1px #dedede;
+		    border-radius: 4px;
+		    h2 {
+		    	font-size: 1.5rem;
+		    }
+		    p {
+		    	font-size: 1.3rem;
+		    	margin-top: 0px;
+		    }
 		}
 	}
 

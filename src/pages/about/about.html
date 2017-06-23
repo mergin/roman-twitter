@@ -27,7 +27,7 @@
                 </div>
                 <div class="col">
                     <h2 class="bold">{{ post.user.name }}<span class="name-tag"> @{{ post.user.screen_name }}</span></h2>
-                    <p>{{ post.created_at | timeAgo }}</p>
+                    <p class="time-spamp">{{ post.created_at | timeAgo }}</p>
                     <p class="tweet-text">{{ post.text }}</p>
                     <div class="row tweet-buttons">
                         <div class="col tweet-buttons">

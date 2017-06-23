@@ -21,22 +21,77 @@
         <ion-item *ngFor="let post of posts.statuses" class="tweet">
 
             <!-- If is not a retweet -->
-            <div class="row" *ngIf="!post.retweeted_status">
+            <div class="row retweet" *ngIf="post.retweeted_status">
                 <div class="col-1">
-                    <img class="profile-pic"
+                    <p>
+                        <ion-icon name="md-sync"></ion-icon>
+                    </p>
+                </div>
+                <div class="col">
+                    <p>{{ post.user.name }} retweeted</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-1">
+                    <img *ngIf="!post.retweeted_status"
+                         class="profile-pic"
                          src="{{ post.user.profile_image_url }}" 
+                         onError="this.src='./assets/img/person-icon.png'">
+                    <img *ngIf="post.retweeted_status"
+                         class="profile-pic" 
+                         src="{{ post.retweeted_status.user.profile_image_url }}" 
                          onError="this.src='./assets/img/person-icon.png'">
                 </div>
                 <div class="col">
 
                     <!--  Tweet content  -->
-                    <h2 class="bold">{{ post.user.name }}<span class="name-tag"> @{{ post.user.screen_name }}</span></h2>
-                    <p>{{ post.created_at | timeAgo }}</p>
-                    <p class="tweet-text">{{ post.text }}</p>
+                    <div *ngIf="!post.retweeted_status">
+                        <h2 class="bold">{{ post.user.name }}
+                            <span class="name-tag"> 
+                                <ion-icon *ngIf="post.user.verified"
+                                          name="md-checkmark-circle" color="blue" class="verified"></ion-icon>
+                                @{{ post.user.screen_name }}
+                            </span>
+                        </h2>
+                        <p class="time-stamp">{{ post.created_at | timeAgo }}</p>
+                        <p class="tweet-text">{{ post.text }}</p>
+                    </div>
+
+                    <!--  Tweet content retweeted -->
+                    <div *ngIf="post.retweeted_status">
+                        <h2 class="bold">{{ post.retweeted_status.user.name }}
+                            <span class="name-tag"> @{{ post.retweeted_status.user.screen_name }}</span>
+                        </h2>
+                        <p class="time-stamp">{{ post.retweeted_status.created_at | timeAgo }}</p>
+                        <p class="tweet-text">{{ post.retweeted_status.text }}</p>
+                    </div>
+
+                    <!--  Quote tweet  -->
+                    <div *ngIf="post.quoted_status">
+                        <h2 class="bold">{{ post.quoted_status.user.name }}
+                            <span class="name-tag"> 
+                                <ion-icon *ngIf="post.quoted_status.user.verified"
+                                          name="md-checkmark-circle" color="blue" class="verified"></ion-icon>
+                                @{{ post.quoted_status.user.screen_name }}
+                            </span>
+                        </h2>
+                        <p class="tweet-text">{{ post.quoted_status.text }}</p>
+                    </div>
+                    <div *ngIf="post.retweeted_status && post.retweeted_status.quoted_status"
+                         class="quote-tweet">
+                        <h2 class="bold">{{ post.retweeted_status.quoted_status.user.name }}
+                            <span class="name-tag"> 
+                                <ion-icon *ngIf="post.retweeted_status.quoted_status.user.verified"
+                                          name="md-checkmark-circle" color="blue" class="verified"></ion-icon>
+                                @{{ post.retweeted_status.quoted_status.user.screen_name }}
+                            </span>
+                        </h2>
+                        <p class="tweet-text">{{ post.retweeted_status.quoted_status.text }}</p>
+                    </div>
 
                     <!--  Tweet images  -->
-                    <div *ngIf="post.extended_entities &&
-                         post.extended_entities.media"
+                    <div *ngIf="post.extended_entities && post.extended_entities.media"
                          class="row">
                         <img *ngFor="let image of post.extended_entities.media"
                              class="col tweet-image" 
@@ -49,70 +104,19 @@
                         <div class="col tweet-buttons">
                             <ion-icon name="ios-chatbubbles-outline"></ion-icon>
                         </div>
-                        <div class="col tweet-buttons">
-                            <ion-icon name="md-sync"></ion-icon>
+                        <div class="col tweet-buttons" [ngClass]="{'retweeted': post.retweeted}">
+                            <ion-icon name="md-sync"></ion-icon> 
+                            <p *ngIf="post.retweet_count!=0">{{ post.retweet_count }}</p>
                         </div>
-                        <div class="col tweet-buttons">
-                            <ion-icon name="md-heart-outline"></ion-icon>
+                        <div class="col tweet-buttons" [ngClass]="{'favorited': post.favorited}">
+                            <ion-icon name="md-heart-outline" *ngIf="!post.favorited"></ion-icon>
+                            <ion-icon name="md-heart" *ngIf="post.favorited"></ion-icon>
+                            <p *ngIf="post.favorite_count!=0">{{ post.favorite_count }}</p>
                         </div>
                     </div>  
                 </div>
             </div>
 
-            <!-- If is a retweet -->
-            <div *ngIf="post.retweeted_status">
-
-                <div class="row retweet">
-                    <div class="col-1">
-                        <p>
-                            <ion-icon name="md-sync"></ion-icon>
-                        </p>
-                    </div>
-                    <div class="col">
-                        <p>{{ post.user.name }} retweeted</p>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-1">
-                        <img class="profile-pic" 
-                             src="{{ post.retweeted_status.user.profile_image_url }}" 
-                             onError="this.src='./assets/img/person-icon.png'">
-                    </div>
-                    <div class="col">
-
-                        <!--  Tweet content  -->
-                        <h2 class="bold">{{ post.retweeted_status.user.name }}
-                            <span class="name-tag"> @{{ post.retweeted_status.user.screen_name }}</span>
-                        </h2>
-                        <p>{{ post.retweeted_status.created_at | timeAgo }}</p>
-                        <p class="tweet-text">{{ post.retweeted_status.text }}</p>
-
-                        <!--  Tweet images  -->
-                        <div *ngIf="post.retweeted_status.extended_entities &&
-                                    post.retweeted_status.extended_entities.media"
-                             class="row">
-                            <img *ngFor="let image of post.retweeted_status.extended_entities.media"
-                                 class="col tweet-image" 
-                                 src="{{ image.media_url_https }}"
-                                 width="{{ image.sizes.thumb.w }}" height="{{ image.sizes.thumb.h }}">
-                        </div>
-
-                        <!--  Tweet buttons  -->
-                        <div class="row tweet-buttons">
-                            <div class="col tweet-buttons">
-                                <ion-icon name="ios-chatbubbles-outline"></ion-icon>
-                            </div>
-                            <div class="col tweet-buttons">
-                                <ion-icon name="md-sync"></ion-icon>
-                            </div>
-                            <div class="col tweet-buttons">
-                                <ion-icon name="md-heart-outline"></ion-icon>
-                            </div>
-                        </div>  
-                    </div>
-                </div>
-            </div>
         </ion-item>
     </ion-list>
 
