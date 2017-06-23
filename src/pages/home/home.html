@@ -68,7 +68,8 @@
                     </div>
 
                     <!--  Quote tweet  -->
-                    <div *ngIf="post.quoted_status">
+                    <div *ngIf="post.quoted_status"
+                         class="quote-tweet">
                         <h2 class="bold">{{ post.quoted_status.user.name }}
                             <span class="name-tag"> 
                                 <ion-icon *ngIf="post.quoted_status.user.verified"
