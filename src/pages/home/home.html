@@ -20,7 +20,7 @@
     <ion-list>
         <ion-item *ngFor="let post of posts.statuses" class="tweet">
 
-            <!-- If is not a retweet -->
+            <!-- If is a retweet -->
             <div class="row retweet" *ngIf="post.retweeted_status">
                 <div class="col-1">
                     <p>
@@ -114,7 +114,8 @@
                             <ion-icon name="md-heart" *ngIf="post.favorited"></ion-icon>
                             <p *ngIf="post.favorite_count!=0">{{ post.favorite_count }}</p>
                         </div>
-                    </div>  
+                    </div> 
+                     
                 </div>
             </div>
 
