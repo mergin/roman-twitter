@@ -14,6 +14,7 @@ import { SplashScreen }                             from '@ionic-native/splash-s
 import {TimeAgoPipe}                                from 'time-ago-pipe';
 
 import { HttpModule }                               from '@angular/http';
+import { HighlightPipe } from '../pipes/highlight/highlight';
 
 @NgModule({
     declarations: [
@@ -22,7 +23,8 @@ import { HttpModule }                               from '@angular/http';
         ContactPage,
         HomePage,
         TabsPage,
-        TimeAgoPipe
+        TimeAgoPipe,
+    HighlightPipe
     ],
     imports: [
         BrowserModule,

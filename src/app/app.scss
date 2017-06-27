@@ -30,6 +30,14 @@ h6, h5, h4, h3, h2, h1, p {
 	&.italic {
 		font-style: italic;
 	}
+
+	&.center-text {
+		text-align: center;
+	}
+
+	&.roman {
+		color: map-get($colors, roman);
+	}
 }
 
 ion-header {
@@ -123,7 +131,7 @@ p.tweet-text {
     		width: 45px;
     		height: 45px;
 		}
-		img.tweet-image {
+		img.tweet-image, video.tweet-image {
 			display: inline-block;
 			padding: 0;
 			flex-grow: 1;

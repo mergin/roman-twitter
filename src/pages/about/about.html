@@ -16,8 +16,9 @@
 </ion-header>
 
 <ion-content>
+
 	<ion-list>
-        <ion-item *ngFor="let post of mentions" class="tweet">
+        <ion-item *ngFor="let post of mentions | slice:0:N; let i=index;" class="tweet">
 
             <div class="row">
                 <div class="col-1">
@@ -30,7 +31,7 @@
                          src="{{ post.retweeted_status.user.profile_image_url }}" 
                          onError="this.src='./assets/img/person-icon.png'">
                 </div>
-                
+
                 <div class="col">
                     <!--  Tweet content  -->
                     <div *ngIf="!post.retweeted_status">
@@ -79,12 +80,40 @@
                     </div>
 
                     <!--  Tweet images  -->
+                    <!--
                     <div *ngIf="post.extended_entities && post.extended_entities.media"
                          class="row">
                         <img *ngFor="let image of post.extended_entities.media"
                              class="col tweet-image" 
                              src="{{ image.media_url_https }}"
                              width="{{ image.sizes.thumb.w }}" height="{{ image.sizes.thumb.h }}">
+                        <div *ngFor="let video of post.extended_entities.media"
+                        	 class="col tweet-image">
+	                        <video *ngIf="video.type=='animated_gif'" controls>
+								<source src="{{ video.video_info.variants[0].url }}" type="video/mp4">
+								Your browser does not support the video tag.
+							</video>
+						</div>
+                    </div>
+                    -->
+
+                    <div *ngIf="post.extended_entities && post.extended_entities.media"
+                         class="row">
+                        <ng-container *ngIf="post.extended_entities.media[0].type!='animated_gif'">
+	                        <img *ngFor="let image of post.extended_entities.media"
+	                             class="col tweet-image" 
+	                             src="{{ image.media_url_https }}"
+	                             width="{{ image.sizes.thumb.w }}" height="{{ image.sizes.thumb.h }}">
+                        </ng-container>
+                        <ng-container *ngIf="post.extended_entities.media[0].type=='animated_gif'">
+	                        <video *ngFor="let video of post.extended_entities.media"
+	                        	   class="col tweet-image"
+	                        	   (click)="toggleVideo()" #videoPlayer
+	                        	   preload="metadata" loop>
+								<source src="{{ video.video_info.variants[0].url }}" type="video/mp4">
+								Your browser does not support the video tag.
+							</video>
+						</ng-container>
                     </div>
                     
                     <!--  Tweet buttons  -->
@@ -105,7 +134,7 @@
 
                 </div>
             </div>
-
         </ion-item>
+        <p class="center-text bold roman" (click)="N=N+10">More</p>
     </ion-list>
 </ion-content>
