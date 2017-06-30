@@ -70,6 +70,15 @@ ion-header {
 	}
 }
 
+.night {
+	.tabbar {
+    	background: map-get($colors, night);
+    }
+    .tab-button-icon {
+    	color: map-get($colors, lightgray);
+    }
+}
+
 .profile-pic {
 	border-radius: 50%;
     overflow: hidden;
@@ -188,6 +197,19 @@ p.tweet-text {
 		    	margin-top: 0px;
 		    }
 		}
+	}
+
+	&.night {
+		background-color: map-get($colors, night);
+		h6, h5, h4, h3, h2, h1, p {
+			color: white;
+		}
+		&.tweet {
+			border-bottom: 1px solid map-get($colors, night2);
+			.name-tag, .time-stamp, .tweet-buttons, .tweet-buttons p {
+    			color: map-get($colors, lightgray);
+			}
+		}	
 	}
 
 	ion-avatar[item-left] {

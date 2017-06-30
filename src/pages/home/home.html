@@ -18,7 +18,8 @@
 <ion-content>
 
     <ion-list>
-        <ion-item *ngFor="let post of posts.statuses | slice:0:N; let i=index;" class="tweet">
+        <ion-item *ngFor="let post of posts.statuses | slice:0:N; let i=index;"
+                  class="tweet" [ngClass]="{'night': false}">
             
             <!-- If is a retweet -->
             <div class="row retweet" *ngIf="post.retweeted_status">
