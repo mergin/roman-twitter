@@ -90,6 +90,10 @@ p.tweet-text {
     white-space: normal;
 }
 
+.highlight {
+	color: map-get($colors, blue);
+}
+
 .row.tweet-buttons {
 	margin-top: 10px;
 	.col.tweet-buttons {

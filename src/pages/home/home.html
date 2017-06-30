@@ -55,7 +55,8 @@
                             </span>
                         </h2>
                         <p class="time-stamp">{{ post.created_at | timeAgo }}</p>
-                        <p class="tweet-text">{{ post.text }}</p>
+                        <!--p class="tweet-text">{{ post.text }}</p-->
+                        <div [innerHTML]="post.text | highlight"></div>
                     </div>
 
                     <!--  Tweet content retweeted -->
@@ -64,7 +65,8 @@
                             <span class="name-tag"> @{{ post.retweeted_status.user.screen_name }}</span>
                         </h2>
                         <p class="time-stamp">{{ post.retweeted_status.created_at | timeAgo }}</p>
-                        <p class="tweet-text">{{ post.retweeted_status.text }}</p>
+                        <!--p class="tweet-text">{{ post.retweeted_status.text }}</p-->
+                        <div [innerHTML]="post.retweeted_status.text | highlight"></div>
                     </div>
 
                     <!--  Quote tweet  -->
